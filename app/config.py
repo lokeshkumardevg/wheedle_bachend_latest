@@ -6,7 +6,7 @@ load_dotenv()
 
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 API_KEY_SECRET = os.getenv("API_KEY_SECRET")
-MONGO_URI = os.getenv("MONGO_URI", "mongodb://127.0.0.1:27017/wheedle")
+MONGO_URI = os.getenv("MONGO_URI", "mongodb+srv://devclientg:SCpLNaejWusV7mcR@cluster0.vyinynw.mongodb.net/wheedle_backend")
 JWT_SECRET = os.getenv("JWT_SECRET", "wheedle_secret_key")
 
 if not OPENAI_API_KEY:
