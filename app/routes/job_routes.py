@@ -58,3 +58,14 @@ def delete_job(id):
         return jsonify({'message': 'Job deleted'})
     except Exception as e:
         return jsonify({'message': str(e)}), 500
+
+
+@job_bp.route('/count/all', methods=['GET'])
+def get_job_count():
+    try:
+        from ..db import mongo
+        count = mongo.db.jobs.count_documents({})
+        return jsonify({'count': count})
+    except Exception as e:
+        print("GET JOB COUNT ERROR:", e)
+        return jsonify({'message': str(e)}), 500

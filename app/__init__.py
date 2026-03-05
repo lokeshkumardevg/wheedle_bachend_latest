@@ -1,5 +1,6 @@
-from flask import Flask
+from flask import Flask, send_from_directory
 from flask_cors import CORS
+import os
 from .db import mongo
 from .config import MONGO_URI
 from .routes.chat_routes import chat_bp
@@ -27,9 +28,13 @@ def create_app():
     CORS(
         app,
         resources={r"/*": {"origins": "*"}},
-        allow_headers=["Content-Type", "x-api-key"],
-        methods=["GET", "POST", "OPTIONS"],
+        allow_headers=["*"],
+        methods=["*"],
     )
+
+    @app.route('/uploads/<path:filename>')
+    def serve_upload(filename):
+        return send_from_directory(os.path.join(app.root_path, '../uploads'), filename)
 
     app.register_blueprint(chat_bp, url_prefix="/py/api")
     app.register_blueprint(auth_bp, url_prefix="/py/api/auth")
